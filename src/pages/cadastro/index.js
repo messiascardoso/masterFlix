@@ -22,11 +22,14 @@ function CadastroCategoria() {
       [key]: value,
     });
   }
-  //hooks
+  // hooks
   // Similar ao componentDidMount e componentDidUpdate:
   useEffect(() => {
     console.log('alo alo w brasil');
-    const url = 'http://localhost:8080/categorias';
+    // const url = 'http://localhost:8080/categorias';
+    const url = window.location.href.includes('localhost')
+      ? 'localhost:8080/categorias'
+      : 'https://memasterflix.herokuapp.com/categorias';
     fetch(url)
       .then(async (resultEndPoint) => {
         const dados = await resultEndPoint.json();
@@ -46,7 +49,7 @@ function CadastroCategoria() {
           setCategorias([
             ...categorias, categoria,
           ]);
-          //setCategoria(valoresIniciais);
+          // setCategoria(valoresIniciais);
         }}
       >
         <FormField
